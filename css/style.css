@@ -1,0 +1,416 @@
+/* Variáveis e estilos globais */
+:root {
+    --primary: #3498db;
+    --secondary: #2ecc71;
+    --danger: #e74c3c;
+    --warning: #f39c12;
+    --dark: #2c3e50;
+    --light: #ecf0f1;
+    --male-color: #3498db;
+    --female-color: #e91e63;
+}
+
+/* Seletor de gênero - versão otimizada */
+.gender-selector {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.gender-option {
+    flex: 1;
+    padding: 20px 10px;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.gender-option.selected {
+    border-color: var(--primary);
+    background-color: rgba(52, 152, 219, 0.1);
+    box-shadow: 0 2px 8px rgba(52, 152, 219, 0.2);
+}
+
+.gender-option:not(.selected) {
+    opacity: 0.6;
+    filter: grayscale(30%);
+}
+
+.gender-icon {
+    margin-bottom: 8px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.gender-icon img {
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    object-fit: contain;
+}
+
+/* Cores específicas para cada gênero */
+.gender-option[data-value="male"] .gender-icon img {
+    color: var(--male-color);
+    fill: var(--male-color);
+}
+
+.gender-option[data-value="female"] .gender-icon img {
+    color: var(--female-color);
+    fill: var(--female-color);
+}
+
+.gender-label {
+    font-weight: 600;
+    color: var(--dark);
+    font-size: 14px;
+    margin-top: 8px;
+    pointer-events: none;
+    user-select: none;
+}
+
+/* Efeito hover para melhor interação */
+.gender-option:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Ajustes para mobile */
+@media (max-width: 480px) {
+    .gender-selector {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .gender-option {
+        padding: 15px 5px;
+    }
+}
+
+/* ===== ESTILOS PARA OS GRÁFICOS ===== */
+.chart-container {
+    position: relative;
+    height: 250px;
+    margin: 20px 0;
+}
+
+/* ===== ESTILOS PARA AS ABAS ===== */
+.tabs {
+    display: flex;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ddd;
+}
+
+.tab {
+    flex: 1;
+    text-align: center;
+    padding: 12px;
+    cursor: pointer;
+    transition: all 0.3s;
+    border-bottom: 3px solid transparent;
+}
+
+.tab.active {
+    border-bottom-color: var(--primary);
+    font-weight: bold;
+    color: var(--primary);
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* ===== ESTILOS PARA OS CARDS DE RESULTADO ===== */
+.result-value {
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--primary);
+    margin: 5px 0;
+}
+
+.macro-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin: 20px 0;
+}
+
+/* ===== MELHORIAS PARA MOBILE ===== */
+@media (max-width: 768px) {
+    .gender-selector {
+        flex-direction: column;
+    }
+    
+    .macro-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .tab {
+        padding: 10px 5px;
+        font-size: 14px;
+    }
+}
+/* ===== ESTILOS GERAIS ===== */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    max-width: 100%;
+    padding: 15px;
+    margin: 0 auto;
+    background-color: #f5f5f5;
+}
+
+.container {
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+}
+
+h1, h2, h3, h4 {
+    color: #2c3e50;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+input, select {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #ddd;
+    border-radius: 6px;
+    font-size: 16px;
+    transition: border 0.3s;
+}
+
+input:focus, select:focus {
+    border-color: #3498db;
+    outline: none;
+}
+
+button {
+    width: 100%;
+    padding: 15px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #2980b9;
+}
+
+button:disabled {
+    background-color: #95a5a6;
+    cursor: not-allowed;
+}
+
+.error-message {
+    color: #e74c3c;
+    font-size: 12px;
+    margin-top: 5px;
+    display: none;
+}
+
+.input-hint {
+    font-size: 12px;
+    color: #7f8c8d;
+    margin-top: 0px;
+    margin-bottom: 10px;
+}
+
+/* ===== RESULTADOS ===== */
+.result {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+    display: none;
+}
+
+.result-value {
+    font-size: 24px;
+    font-weight: bold;
+    color: #3498db;
+    margin: 5px 0;
+}
+
+.info-card {
+    background-color: #ecf0f1;
+    border-left: 4px solid #3498db;
+    padding: 15px;
+    margin: 15px 0;
+    border-radius: 0 6px 6px 0;
+}
+
+.info-card h4 {
+    margin-top: 0;
+}
+
+/* ===== ABAS ===== */
+.tabs {
+    display: flex;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ddd;
+}
+
+.tab {
+    flex: 1;
+    text-align: center;
+    padding: 12px;
+    cursor: pointer;
+    transition: all 0.3s;
+    border-bottom: 3px solid transparent;
+}
+
+.tab.active {
+    border-bottom-color: #3498db;
+    font-weight: bold;
+    color: #3498db;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* ===== GRÁFICOS ===== */
+.chart-container {
+    position: relative;
+    height: 250px;
+    margin: 20px 0;
+}
+
+/* ===== MACRONUTRIENTES ===== */
+.macro-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.macro-card {
+    padding: 15px;
+    border-radius: 8px;
+    color: white;
+    text-align: center;
+}
+
+.macro-card h3 {
+    margin-top: 0;
+    color: white;
+}
+
+.carbs-card {
+    background-color: #e74c3c;
+}
+
+.protein-card {
+    background-color: #3498db;
+}
+
+.fat-card {
+    background-color: #f39c12;
+}
+
+/* ===== SELETOR DE GÊNERO ===== */
+.gender-selector {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.gender-option {
+    flex: 1;
+    padding: 20px 10px;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.macro-card h3, 
+.macro-card .result-value, 
+.macro-card p {
+    color: white !important;
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.3);
+}
+
+.gender-option.selected {
+    border-color: #3498db;
+    background-color: rgba(52, 152, 219, 0.1);
+    box-shadow: 0 2px 8px rgba(52, 152, 219, 0.2);
+}
+
+.gender-option:not(.selected) {
+    opacity: 0.6;
+    filter: grayscale(30%);
+}
+
+.gender-icon {
+    margin-bottom: 8px;
+}
+
+.gender-icon img {
+    width: 40px;
+    height: 40px;
+    pointer-events: none;
+}
+
+.gender-label {
+    font-weight: 600;
+    color: #2c3e50;
+    font-size: 14px;
+}
+
+/* ===== RESPONSIVIDADE ===== */
+@media (max-width: 768px) {
+    .gender-selector {
+        flex-direction: column;
+    }
+    
+    .macro-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .tab {
+        padding: 10px 5px;
+        font-size: 14px;
+    }
+}
