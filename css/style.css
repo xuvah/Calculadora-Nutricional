@@ -434,3 +434,69 @@ button:disabled {
 #monthly-goal-container select {
     margin-top: 5px;
 }
+
+/* Estilos para o card de IMC */
+#bmi-value {
+    font-size: 1.8rem;
+    margin: 10px 0;
+}
+
+/* Cores para diferentes classificações de IMC */
+#bmi-value.underweight {
+    color: #3498db; /* Azul para baixo peso */
+}
+
+#bmi-value.normal {
+    color: #2ecc71; /* Verde para normal */
+}
+
+#bmi-value.overweight {
+    color: #f39c12; /* Laranja para sobrepeso */
+}
+
+#bmi-value.obese {
+    color: #e74c3c; /* Vermelho para obesidade */
+}
+
+/* Estilos para a tabela de classificação */
+.bmi-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    font-size: 0.9rem;
+}
+
+.bmi-table th, .bmi-table td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.bmi-table th {
+    background-color: #f2f2f2;
+}
+
+.bmi-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.source {
+    font-style: italic;
+    font-size: 0.8rem;
+    color: #7f8c8d;
+    margin-top: 5px;
+}
+
+details {
+    margin-top: 10px;
+}
+
+details summary {
+    cursor: pointer;
+    font-weight: 600;
+    color: #3498db;
+}
+
+details summary:hover {
+    text-decoration: underline;
+}

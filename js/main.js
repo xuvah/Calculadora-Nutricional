@@ -59,7 +59,7 @@ const DOM = {
     DOM.sexInput.value = element.dataset.value;
     
     // Valida o formulário
-    validateField('sexInput');
+    // validateField('sexInput');
   }
   
   function validateField(field) {
@@ -179,9 +179,10 @@ const DOM = {
     const tdee = calculateTDEE(tmb, activity);
     const { calories, explanation } = calculateCalorieGoal(tdee, goal, monthlyGoal);
     const { protein, fat, carbs } = calculateMacros(weight, calories, goal,bf);
+    const { value, classification } = calculateBMI(weight, height);
     
     // Exibir resultados
-    displayResults(tmb, tdee, calories, explanation, protein, fat, carbs);
+    displayResults(tmb, tdee, calories, explanation, protein, fat, carbs, value, classification);
     // Destruir gráficos existentes antes de criar novos
     if (calorieChart) {
       calorieChart.destroy();
@@ -209,6 +210,16 @@ const DOM = {
       weight: parseFloat(DOM.weightInput.value)
     };
   }
+
+    // Adicione esta função para calcular o IMC e classificação
+    function calculateBMI(weight, height) {
+      const heightInMeters = height / 100;
+      const bmi = weight / (heightInMeters * heightInMeters);
+      return {
+          value: bmi.toFixed(2),
+          classification: getBMIClassification(bmi)
+      };
+    }
   
   function calculateTMB(sex, weight, height, age, leanMass) {
     if (leanMass) {
@@ -280,8 +291,21 @@ const DOM = {
       carbs: Math.round(carbs)
     };
   }
-  
-  function displayResults(tmb, tdee, calories, explanation, protein, fat, carbs) {
+
+
+
+  function getBMIClassification(bmi) {
+    if (bmi < 16.0) return 'Baixo peso (Grau 3)';
+    if (bmi >= 16.0 && bmi <= 16.9) return 'Baixo peso (Grau 2)';
+    if (bmi >= 17.0 && bmi <= 18.49) return 'Baixo peso (Grau 1)';
+    if (bmi >= 18.5 && bmi <= 24.9) return 'Eutrofia (Normal)';
+    if (bmi >= 25.0 && bmi <= 29.9) return 'Pré-obesidade';
+    if (bmi >= 30.0 && bmi <= 34.9) return 'Obesidade (Grau 1)';
+    if (bmi >= 35.0 && bmi <= 39.9) return 'Obesidade (Grau 2)';
+    return 'Obesidade (Grau 3)';
+  }
+
+  function displayResults(tmb, tdee, calories, explanation, protein, fat, carbs, value, classification) {
     document.getElementById('tmb').textContent = `${Math.round(tmb)} kcal`;
     document.getElementById('tdee').textContent = `${Math.round(tdee)} kcal`;
     document.getElementById('calories').textContent = `${Math.round(calories)} kcal`;
@@ -294,12 +318,28 @@ const DOM = {
     const proteinPerc = Math.round((protein * 4) / calories * 100);
     const fatPerc = Math.round((fat * 9) / calories * 100);
     const carbsPerc = Math.round((carbs * 4) / calories * 100);
+   
     
     document.getElementById('carbs-perc').textContent = carbsPerc;
     document.getElementById('protein-perc').textContent = proteinPerc;
     document.getElementById('fat-perc').textContent = fatPerc;
+    document.getElementById('bmi-value').textContent = `${value} kg/m²`;
+    document.getElementById('bmi-classification').textContent = `Classificação: ${classification}`;
+    // Adicionar classe conforme classificação
+    const bmiElement = document.getElementById('bmi-value');
+    bmiElement.className = 'result-value ' + getBMIClass(parseFloat(value));
+    
   }
+
   
+
+  function getBMIClass(bmi) {
+    if (bmi < 18.5) return 'underweight';
+    if (bmi >= 18.5 && bmi < 25) return 'normal';
+    if (bmi >= 25 && bmi < 30) return 'overweight';
+    return 'obese';
+  }
+
   function createCharts(tmb, tdee, calories, goal, carbs, protein, fat) {
     createCalorieChart(tmb, tdee, calories, goal);
     createMacroChart(carbs, protein, fat);

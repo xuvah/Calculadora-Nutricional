@@ -129,6 +129,59 @@
             <div class="chart-container">
                 <canvas id="calorieChart"></canvas>
             </div>
+            
+            <div class="info-card">
+                <h4>Índice de Massa Corporal (IMC)</h4>
+                <p class="result-value" id="bmi-value">0.00 kg/m²</p>
+                <p id="bmi-classification">Classificação: -</p>
+                <details>
+                    <summary>Ver classificação IMC</summary>
+                    <table class="bmi-table">
+                        <thead>
+                            <tr>
+                                <th>Classificação</th>
+                                <th>IMC (kg/m²)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Baixo peso (Grau 3)</td>
+                                <td>&lt; 16,0</td>
+                            </tr>
+                            <tr>
+                                <td>Baixo peso (Grau 2)</td>
+                                <td>16,0 - 16,9</td>
+                            </tr>
+                            <tr>
+                                <td>Baixo peso (Grau 1)</td>
+                                <td>17,0 - 18,49</td>
+                            </tr>
+                            <tr>
+                                <td>Eutrofia (Normal)</td>
+                                <td>18,5 - 24,9</td>
+                            </tr>
+                            <tr>
+                                <td>Pré-obesidade</td>
+                                <td>25,0 - 29,9</td>
+                            </tr>
+                            <tr>
+                                <td>Obesidade (Grau 1)</td>
+                                <td>30,0 - 34,9</td>
+                            </tr>
+                            <tr>
+                                <td>Obesidade (Grau 2)</td>
+                                <td>35 - 39,9</td>
+                            </tr>
+                            <tr>
+                                <td>Obesidade (Grau 3)</td>
+                                <td>≥ 40,0</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p class="source">Fonte: Quetelet (1836)</p>
+                </details>
+            </div>
+            
         </div>
         
         <div id="macros-tab" class="tab-content">
