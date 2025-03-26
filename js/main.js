@@ -39,6 +39,7 @@ const DOM = {
     // Campos de seleção
     DOM.activityInput.addEventListener('change', updateCalculateButton);
     DOM.goalInput.addEventListener('change', updateCalculateButton);
+    DOM.goalInput.addEventListener('change', () => {toggleMonthlyGoal();updateCalculateButton();});
   });
   
   // =============================================
@@ -167,6 +168,7 @@ const DOM = {
     if (!validateAllFields()) return;
     
     // Obter valores
+    const monthlyGoal = parseFloat(document.getElementById('monthly-goal')?.value || 0.5);
     const { sex, age, height, weight } = getInputValues();
     const bf = DOM.bfInput.value ? parseFloat(DOM.bfInput.value) : null;
     const activity = parseFloat(DOM.activityInput.value);
@@ -175,12 +177,18 @@ const DOM = {
     // Cálculos
     const tmb = calculateTMB(sex, weight, height, age);
     const tdee = calculateTDEE(tmb, activity);
-    const { calories, explanation } = calculateCalorieGoal(tdee, goal);
+    const { calories, explanation } = calculateCalorieGoal(tdee, goal, monthlyGoal);
     const { protein, fat, carbs } = calculateMacros(weight, bf, calories, goal);
     
     // Exibir resultados
     displayResults(tmb, tdee, calories, explanation, protein, fat, carbs);
-    
+    // Destruir gráficos existentes antes de criar novos
+    if (calorieChart) {
+      calorieChart.destroy();
+    }
+    if (macroChart) {
+        macroChart.destroy();
+    }
     // Criar gráficos
     createCharts(tmb, tdee, calories, goal, carbs, protein, fat);
     
@@ -212,23 +220,38 @@ const DOM = {
     return tmb * activity;
   }
   
-  function calculateCalorieGoal(tdee, goal) {
+  function calculateCalorieGoal(tdee, goal, monthlyGoal) {
+    let calories, explanation;
+    
     switch(goal) {
-      case 'cut':
-        return {
-          calories: tdee - 500,
-          explanation: "Déficit de 500kcal/dia para perda de gordura sustentável (~0.5kg/semana)."
-        };
-      case 'bulk':
-        return {
-          calories: tdee + 500,
-          explanation: "Superávit de 500kcal/dia para ganho muscular com mínimo de gordura."
-        };
-      default:
-        return {
-          calories: tdee,
-          explanation: "Manutenção calórica para manter seu peso atual."
-        };
+        case 'cut':
+            const weeklyDeficit = monthlyGoal * 7700 / 4; // 7700kcal ≈ 1kg de gordura
+            calories = tdee - (weeklyDeficit / 7);
+            explanation = `Déficit de ~${Math.round(weeklyDeficit)}kcal/semana para perder ${monthlyGoal}kg/semana`;
+            break;
+            
+        case 'bulk':
+            const weeklySurplus = monthlyGoal * 7700 / 4; // Aprox. 2000kcal para ganhar 0.5kg de músculo/semana
+            calories = tdee + (weeklySurplus / 7);
+            explanation = `Superávit de ~${Math.round(weeklySurplus)}kcal/semana para ganhar ${monthlyGoal}kg/semana`;
+            break;
+            
+        default:
+            calories = tdee;
+            explanation = "Manutenção calórica para manter seu peso atual";
+    }
+    
+    return { calories, explanation };
+  }
+
+  function toggleMonthlyGoal() {
+    const goal = DOM.goalInput.value;
+    const container = document.getElementById('monthly-goal-container');
+    
+    if (goal === 'cut' || goal === 'bulk') {
+        container.style.display = 'block';
+    } else {
+        container.style.display = 'none';
     }
   }
   
@@ -282,6 +305,8 @@ const DOM = {
   function showError(elementId, show) {
     document.getElementById(elementId).style.display = show ? 'block' : 'none';
   }
+
+  
   
   // =============================================
   // FUNÇÕES DOS GRÁFICOS

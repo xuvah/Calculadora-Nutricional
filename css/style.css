@@ -414,3 +414,11 @@ button:disabled {
         font-size: 14px;
     }
 }
+#monthly-goal-container {
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+#monthly-goal-container select {
+    margin-top: 5px;
+}

@@ -81,6 +81,18 @@
             </select>
             <div id="goal-error" class="error-message">Por favor, selecione seu objetivo</div>
         </div>
+        
+        <div class="form-group" id="monthly-goal-container" style="display: none;">
+            <label for="monthly-goal">Meta mensal (kg)</label>
+            <select id="monthly-goal">
+                <option value="0.25">0.25 kg/semana (~1 kg/mês)</option>
+                <option value="0.5" selected>0.5 kg/semana (~2 kg/mês)</option>
+                <option value="0.75">0.75 kg/semana (~3 kg/mês)</option>
+                <option value="1">1 kg/semana (~4 kg/mês)</option>
+            </select>
+            <div class="input-hint">Taxa saudável recomendada: 0.5-1 kg/semana</div>
+        </div>
+
     </div>
     
     <button id="calculate-btn" onclick="calculate()" disabled>Calcular</button>
