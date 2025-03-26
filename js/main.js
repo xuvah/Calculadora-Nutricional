@@ -173,12 +173,12 @@ const DOM = {
     const bf = DOM.bfInput.value ? parseFloat(DOM.bfInput.value) : null;
     const activity = parseFloat(DOM.activityInput.value);
     const goal = DOM.goalInput.value;
-    
     // Cálculos
-    const tmb = calculateTMB(sex, weight, height, age);
+    const leanMass = bf ? weight * (1 - bf/100): null;
+    const tmb = calculateTMB(sex, weight, height, age, leanMass);
     const tdee = calculateTDEE(tmb, activity);
     const { calories, explanation } = calculateCalorieGoal(tdee, goal, monthlyGoal);
-    const { protein, fat, carbs } = calculateMacros(weight, bf, calories, goal);
+    const { protein, fat, carbs } = calculateMacros(weight, calories, goal,bf);
     
     // Exibir resultados
     displayResults(tmb, tdee, calories, explanation, protein, fat, carbs);
@@ -210,10 +210,14 @@ const DOM = {
     };
   }
   
-  function calculateTMB(sex, weight, height, age) {
-    return sex === 'male' 
-      ? 10 * weight + 6.25 * height - 5 * age + 5
-      : 10 * weight + 6.25 * height - 5 * age - 161;
+  function calculateTMB(sex, weight, height, age, leanMass) {
+    if (leanMass) {
+      return 284 + 25.9 * leanMass;
+    }else{
+      return sex === 'male' 
+        ? 10 * weight + 6.25 * height - 5 * age + 5
+        : 10 * weight + 6.25 * height - 5 * age - 161;
+    }
   }
   
   function calculateTDEE(tmb, activity) {
@@ -225,15 +229,15 @@ const DOM = {
     
     switch(goal) {
         case 'cut':
-            const weeklyDeficit = monthlyGoal * 7700 / 4; // 7700kcal ≈ 1kg de gordura
-            calories = tdee - (weeklyDeficit / 7);
-            explanation = `Déficit de ~${Math.round(weeklyDeficit)}kcal/semana para perder ${monthlyGoal}kg/semana`;
+            const dailyDeficit = monthlyGoal * 4 * 7700 / 30; // 7700kcal ≈ 1kg de gordura
+            calories = tdee - dailyDeficit ;
+            explanation = `Déficit de ~${Math.round(dailyDeficit)}kcal/dia para perder ${monthlyGoal}kg/semana`;
             break;
             
         case 'bulk':
-            const weeklySurplus = monthlyGoal * 7700 / 4; // Aprox. 2000kcal para ganhar 0.5kg de músculo/semana
-            calories = tdee + (weeklySurplus / 7);
-            explanation = `Superávit de ~${Math.round(weeklySurplus)}kcal/semana para ganhar ${monthlyGoal}kg/semana`;
+            const dailySurplus = monthlyGoal * 7700 / 30; // Aprox. 2000kcal para ganhar 0.5kg de músculo/semana
+            calories = tdee + dailySurplus;
+            explanation = `Superávit de ~${Math.round(dailySurplus)}kcal/dia para ganhar ${monthlyGoal}kg/semana`;
             break;
             
         default:
@@ -255,19 +259,18 @@ const DOM = {
     }
   }
   
-  function calculateMacros(weight, bf, calories, goal) {
+  function calculateMacros(weight, calories, goal, bf) {
     let protein;
     
-    if (goal === 'bulk') {
+    if (goal === 'cut') {
       protein = weight * 1.8;
-    } else if (goal === 'cut' && bf) {
-      const leanMass = weight * (1 - bf/100);
-      protein = leanMass * 2.3;
     } else {
-      protein = weight * 1.6;
-    }
+      protein = weight * 2;
+    } 
     
-    const fat = (calories * 0.25) / 9;
+    const fat = goal === 'cut' ? weight * 0.9 
+    : (goal === 'bulk' && bf) ? weight *(1+((100-bf)*0.0025)) 
+    : weight;
     const carbCalories = calories - (protein * 4) - (fat * 9);
     const carbs = carbCalories / 4;
     

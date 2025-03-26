@@ -36,6 +36,22 @@
     box-shadow: 0 2px 8px rgba(52, 152, 219, 0.2);
 }
 
+/* Substitua ou adicione estas regras */
+.gender-option[data-value="female"].selected {
+    border-color: #e91e63; /* Rosa mais vibrante */
+    background-color: rgba(233, 30, 99, 0.1); /* Rosa claro com transparência */
+    box-shadow: 0 2px 8px rgba(233, 30, 99, 0.2); /* Sombra rosa */
+}
+
+/* Mantenha o azul para o masculino */
+.gender-option[data-value="male"].selected {
+    border-color: #3498db;
+    background-color: rgba(52, 152, 219, 0.1);
+    box-shadow: 0 2px 8px rgba(52, 152, 219, 0.2);
+}
+
+
+
 .gender-option:not(.selected) {
     opacity: 0.6;
     filter: grayscale(30%);
@@ -64,8 +80,8 @@
 }
 
 .gender-option[data-value="female"] .gender-icon img {
-    color: var(--female-color);
-    fill: var(--female-color);
+    color: var(--female-color) important;
+    fill: var(--female-color) important;
 }
 
 .gender-label {
@@ -192,6 +208,7 @@ h1 {
 
 .form-group {
     margin-bottom: 15px;
+    margin-right: 15px;
 }
 
 label {
@@ -372,11 +389,6 @@ button:disabled {
     text-shadow: 1px 1px 1px rgba(0,0,0,0.3);
 }
 
-.gender-option.selected {
-    border-color: #3498db;
-    background-color: rgba(52, 152, 219, 0.1);
-    box-shadow: 0 2px 8px rgba(52, 152, 219, 0.2);
-}
 
 .gender-option:not(.selected) {
     opacity: 0.6;
