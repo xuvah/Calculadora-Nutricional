@@ -68,7 +68,7 @@ const DOM = {
     switch(field) {
       case 'ageInput':
         const age = parseInt(value);
-        showError(ERROR_IDS.age, value && (age < 10 || age > 120));
+        showError(ERROR_IDS.age, value && (age < 18 || age > 120));
         break;
         
       case 'heightInput':

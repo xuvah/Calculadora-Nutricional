@@ -15,13 +15,14 @@
 }/*opções boas de amarelo #ccc454 */
 
 body {
-    font-family: "Raleway", sans-serif; /* Fonte moderna e comercial */
+    font-family: "The Seasons"; /* Fonte moderna e comercial */
+    font-weight: lighter;
     line-height: 1.6;
     color: var(--text-primary);
     max-width: 960px; /* Largura máxima para o body */
     padding: 15px;
     margin: 0 auto; /* Centralizar o conteúdo */
-    background: linear-gradient(to bottom, var(--neutral-light), #e0e7ed); /* Gradiente leve no background */
+    background: linear-gradient(to bottom, var(--neutral-medium), var(--carbs-color)); /* Gradiente suave de um tom claro para branco */
     background-attachment: fixed; /* Manter o gradiente fixo */
 }
 
@@ -44,6 +45,17 @@ h1 {
     font-size: 2.5em; /* Aumentando um pouco a fonte do título */
     font-weight: lighter;
 }
+h3 {
+    font-family: "The Seasons"; /* Fonte moderna e comercial */
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: lighter;
+}
+h4 {
+    font-family: "Arsenal", sans-serif; /* Fonte moderna e comercial */
+    margin-bottom: 25px;
+    font-weight:lighter;
+}
 
 .form-group {
     margin-bottom: 18px;
@@ -53,7 +65,6 @@ h1 {
 label {
     display: block;
     margin-bottom: 6px;
-    font-weight: 600;
     color: var(--text-primary);
 }
 
