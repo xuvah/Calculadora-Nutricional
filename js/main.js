@@ -180,9 +180,10 @@ const DOM = {
     const { calories, explanation } = calculateCalorieGoal(tdee, goal, monthlyGoal);
     const { protein, fat, carbs } = calculateMacros(weight, calories, goal,bf);
     const { value, classification } = calculateBMI(weight, height);
+    const waterIntake = (weight * 0.035).toFixed(2);
     
     // Exibir resultados
-    displayResults(tmb, tdee, calories, explanation, protein, fat, carbs, value, classification);
+    displayResults(tmb, tdee, calories, explanation, protein, fat, carbs, value, classification,waterIntake);
     // Destruir gráficos existentes antes de criar novos
     if (calorieChart) {
       calorieChart.destroy();
@@ -305,7 +306,7 @@ const DOM = {
     return 'Obesidade (Grau 3)';
   }
 
-  function displayResults(tmb, tdee, calories, explanation, protein, fat, carbs, value, classification) {
+  function displayResults(tmb, tdee, calories, explanation, protein, fat, carbs, value, classification, waterIntake) {
     document.getElementById('tmb').textContent = `${Math.round(tmb)} kcal`;
     document.getElementById('tdee').textContent = `${Math.round(tdee)} kcal`;
     document.getElementById('calories').textContent = `${Math.round(calories)} kcal`;
@@ -314,6 +315,7 @@ const DOM = {
     document.getElementById('carbs').textContent = `${carbs}g`;
     document.getElementById('protein').textContent = `${protein}g`;
     document.getElementById('fat').textContent = `${fat}g`;
+    document.getElementById('water-intake').textContent = `${waterIntake} Litros`; 
     
     const proteinPerc = Math.round((protein * 4) / calories * 100);
     const fatPerc = Math.round((fat * 9) / calories * 100);
@@ -368,7 +370,7 @@ const DOM = {
         labels: ['TMB (Repouso)', 'TDEE (Total Diário)', goalLabel],
         datasets: [{
           data: [tmb, tdee, calories],
-          backgroundColor: ['#9b59b6', '#3498db', goalColor],
+          backgroundColor: ['#C3C56B', '#F7CE82', goalColor],
           borderColor: ['#8e44ad', '#2980b9', borderColor],
           borderWidth: 1
         }]
@@ -396,7 +398,11 @@ const DOM = {
         ],
         datasets: [{
           data: [carbs, protein, fat],
-          backgroundColor: ['#e74c3c', '#3498db', '#f39c12'],
+           backgroundColor: [
+           '#6e6e16',
+           '#d54f4f',
+           '#DDD06A'
+        ],
           borderWidth: 1
         }]
       },
@@ -413,19 +419,19 @@ const DOM = {
       case 'cut':
         return {
           goalLabel: 'Meta (Déficit)',
-          goalColor: '#e74c3c',
+          goalColor: '#99A9A7',
           borderColor: '#c0392b'
         };
       case 'bulk':
         return {
           goalLabel: 'Meta (Superávit)',
-          goalColor: '#2ecc71',
+          goalColor: '#99C9AA',
           borderColor: '#27ae60'
         };
       default:
         return {
           goalLabel: 'Meta (Manutenção)',
-          goalColor: '#3498db',
+          goalColor: '#9999AA',
           borderColor: '#2980b9'
         };
     }

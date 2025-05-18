@@ -8,7 +8,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js/dist/chart.umd.js"></script>
 </head>
 <body>
-    <h1>Calculadora Nutricional Avançada</h1>
+    <h1>CALCULADORA MACROFIT</h1>
     
     <div class="container">
         <h2>Por favor, preencha com seus dados abaixo:</h2>
@@ -21,13 +21,13 @@
                     <div class="gender-icon">
                         <img src="images/male-icon.svg" alt="Masculino" width="40" height="40">
                     </div>
-                    <div class="gender-label">Masculino</div>
+                    <div class="gender-label">MASCULINO</div>
                 </div>
                 <div class="gender-option" data-value="female" onclick="selectGender(this)">
                     <div class="gender-icon">
-                        <img src="images/female-icon.svg" alt="Feminino" width="40" height="40">
+                        <img src="images/female-icon.svg" alt="Feminino">
                     </div>
-                    <div class="gender-label">Feminino</div>
+                    <div class="gender-label">FEMININO</div>
                 </div>
             </div>
             <input type="hidden" id="sex" value="">
@@ -105,7 +105,7 @@
         </div>
         
         <div id="summary-tab" class="tab-content active">
-            <h2>Seus Resultados</h2>
+            <h2>SEUS RESULTADOS</h2>
             
             <div class="info-card">
                 <h4>TMB</h4>
@@ -114,13 +114,13 @@
             </div>
             
             <div class="info-card">
-                <h4>Gasto Calórico Diário (TDEE)</h4>
+                <h4>GASTO CALÓRICO DIÁRIO (TDEE)</h4>
                 <p class="result-value" id="tdee">0 kcal</p>
                 <p>Seu TDEE é o total de calorias que o seu corpo gasta de acordo com a sua TMB e o nível de atividade física.</p>
             </div>
             
             <div class="info-card">
-                <h4>Meta Calórica Diária</h4>
+                <h4>META CALÓRICA DIÁRIA</h4>
                 <p class="result-value" id="calories">0 kcal</p>
                 <p>É o valor calórico total da sua dieta.</p>
                 <p id="calorie-explanation">Esta é sua meta diária para alcançar seu objetivo selecionado.</p>
@@ -131,7 +131,7 @@
             </div>
             
             <div class="info-card">
-                <h4>Índice de Massa Corporal (IMC)</h4>
+                <h4>ÍNDICE DE MASSA CORPORAL (IMC)</h4>
                 <p class="result-value" id="bmi-value">0.00 kg/m²</p>
                 <p id="bmi-classification">Classificação: -</p>
                 <details>
@@ -180,6 +180,12 @@
                     </table>
                     <p class="source">Fonte: Quetelet (1836)</p>
                 </details>
+            </div>
+
+            <div class="info-card">
+                <h4>CONSUMO DIÁRIO DE ÁGUA</h4>
+                <p class="result-value" id="water-intake">0 L</p>
+                <p class="source">Fonte: OMS</p>
             </div>
             
         </div>
@@ -262,12 +268,12 @@
 
             <div class="info-card">
                 <h4>Déficit Calórico</h4>
-                <p>É o princício que <strong>toda</strong> dieta de emagrecimento deve seguir. Você ingere <strong>menos</strong> calorias que o seu corpo gasta.</p>
+                <p>Você ingere <strong>menos</strong> calorias que o seu corpo gasta.</p>
             </div>
 
             <div class="info-card">
                 <h4>Superávit Calórico</h4>
-                <p>É o princício que <strong>toda</strong> dieta de ganho de massa deve seguir. Você ingere <strong>mais</strong> calorias que o seu corpo gasta.</p>
+                <p>Você ingere <strong>mais</strong> calorias que o seu corpo gasta.</p>
             </div>
 
             <div class="info-card">

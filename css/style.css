@@ -1,128 +1,150 @@
-/* Variáveis e estilos globais */
+/* Variáveis e estilos globais - Paleta de cores moderna e comercial */
 :root {
-    --primary: #3498db;
-    --secondary: #2ecc71;
-    --danger: #e74c3c;
-    --warning: #f39c12;
-    --dark: #2c3e50;
-    --light: #ecf0f1;
-    --male-color: #3498db;
-    --female-color: #e91e63;
+    --primary: #557A58;        /* Verde musgo moderno */
+    --secondary: #a6b890;      /* Verde sutil e elegante */
+    --accent: #37472e;         /* Verde escuro sofisticado */
+    --neutral-light: #F8F8F1;    /* Cinza bem claro para fundos */
+    --neutral-medium: #d7d9ce;  /* Cinza claro suave */
+    --text-primary: #263238;    /* Cinza azulado escuro para texto principal */
+    --text-secondary: #546e7a;  /* Cinza azulado médio para detalhes */
+    --male-color: #1e88e5;      /* Azul moderno para masculino */
+    --female-color: #c2185b;    /* Rosa moderno para feminino */
+    --carbs-color: #6e6e16;     /* Verde moderno para carboidratos */
+    --protein-color: #d54f4f;   /* Vermelho moderno para proteína */
+    --fat-color: #DDD06A;       /* Amarelo/Laranja moderno para gordura */
+}/*opções boas de amarelo #ccc454 */
+
+body {
+    font-family: "Raleway", sans-serif; /* Fonte moderna e comercial */
+    line-height: 1.6;
+    color: var(--text-primary);
+    max-width: 960px; /* Largura máxima para o body */
+    padding: 15px;
+    margin: 0 auto; /* Centralizar o conteúdo */
+    background: linear-gradient(to bottom, var(--neutral-light), #e0e7ed); /* Gradiente leve no background */
+    background-attachment: fixed; /* Manter o gradiente fixo */
 }
 
-/* Seletor de gênero - versão otimizada */
-.gender-selector {
-    display: flex;
-    gap: 15px;
-    margin-bottom: 15px;
-}
-
-.gender-option {
-    flex: 1;
-    padding: 20px 10px;
-    border: 2px solid #ddd;
+.container {
+    background-color: white; /* Branco para os containers para destacar */
     border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.08); /* Sombra suave */
+}
+
+h1, h2, h3, h4 {
+    color: var(--accent);
+}
+
+h1 {
+    font-family: "The Seasons"; /* Aplicando a fonte ao título principal */
     text-align: center;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    margin-bottom: 25px;
+    font-size: 2.5em; /* Aumentando um pouco a fonte do título */
+    font-weight: lighter;
 }
 
-.gender-option.selected {
-    border-color: var(--primary);
-    background-color: rgba(52, 152, 219, 0.1);
-    box-shadow: 0 2px 8px rgba(52, 152, 219, 0.2);
+.form-group {
+    margin-bottom: 18px;
+    margin-right: 15px;
 }
 
-/* Substitua ou adicione estas regras */
-.gender-option[data-value="female"].selected {
-    border-color: #e91e63; /* Rosa mais vibrante */
-    background-color: rgba(233, 30, 99, 0.1); /* Rosa claro com transparência */
-    box-shadow: 0 2px 8px rgba(233, 30, 99, 0.2); /* Sombra rosa */
-}
-
-/* Mantenha o azul para o masculino */
-.gender-option[data-value="male"].selected {
-    border-color: #3498db;
-    background-color: rgba(52, 152, 219, 0.1);
-    box-shadow: 0 2px 8px rgba(52, 152, 219, 0.2);
-}
-
-
-
-.gender-option:not(.selected) {
-    opacity: 0.6;
-    filter: grayscale(30%);
-}
-
-.gender-icon {
-    margin-bottom: 8px;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.gender-icon img {
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    object-fit: contain;
-}
-
-/* Cores específicas para cada gênero */
-.gender-option[data-value="male"] .gender-icon img {
-    color: var(--male-color);
-    fill: var(--male-color);
-}
-
-.gender-option[data-value="female"] .gender-icon img {
-    color: var(--female-color) important;
-    fill: var(--female-color) important;
-}
-
-.gender-label {
+label {
+    display: block;
+    margin-bottom: 6px;
     font-weight: 600;
-    color: var(--dark);
-    font-size: 14px;
-    margin-top: 8px;
-    pointer-events: none;
-    user-select: none;
+    color: var(--text-primary);
 }
 
-/* Efeito hover para melhor interação */
-.gender-option:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+input, select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--neutral-medium); /* Borda mais sutil */
+    border-radius: 6px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+    background-color: white;
 }
 
-/* Ajustes para mobile */
-@media (max-width: 480px) {
-    .gender-selector {
-        flex-direction: column;
-        gap: 10px;
-    }
-    
-    .gender-option {
-        padding: 15px 5px;
-    }
+input:focus, select:focus {
+    border-color: var(--primary);
+    outline: none;
+    box-shadow: 0 0 0 0.15rem rgba(85, 122, 70, 0.25); /* Efeito de foco suave */
 }
 
-/* ===== ESTILOS PARA OS GRÁFICOS ===== */
-.chart-container {
-    position: relative;
-    height: 250px;
-    margin: 20px 0;
+button {
+    width: 100%;
+    padding: 15px;
+    background-color: var(--carbs-color);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.08);
 }
 
-/* ===== ESTILOS PARA AS ABAS ===== */
+button:hover {
+    background-color: var(--accent);
+}
+
+button:disabled {
+    background-color: var(--neutral-medium);
+    cursor: not-allowed;
+}
+
+.error-message {
+    color: #d32f2f; /* Vermelho mais escuro para erro */
+    font-size: 12px;
+    margin-top: 5px;
+    display: none;
+}
+
+.input-hint {
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin-top: 0px;
+    margin-bottom: 12px;
+}
+
+/* ===== RESULTADOS ===== */
+.result {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+    display: none;
+}
+
+.result-value {
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--primary);
+    margin: 5px 0;
+}
+
+.info-card {
+    background-color: var(--neutral-light);
+    border-left: 4px solid var(--primary);
+    padding: 15px;
+    margin: 15px 0;
+    border-radius: 0 6px 6px 0;
+}
+
+.info-card h4 {
+    margin-top: 0;
+    color: var(--accent);
+}
+
+/* ===== ABAS ===== */
 .tabs {
     display: flex;
     margin-bottom: 20px;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid var(--neutral-medium);
 }
 
 .tab {
@@ -130,8 +152,9 @@
     text-align: center;
     padding: 12px;
     cursor: pointer;
-    transition: all 0.3s;
+    transition: color 0.3s ease, border-bottom-color 0.3s ease;
     border-bottom: 3px solid transparent;
+    color: var(--text-secondary);
 }
 
 .tab.active {
@@ -148,189 +171,15 @@
     display: block;
 }
 
-/* ===== ESTILOS PARA OS CARDS DE RESULTADO ===== */
-.result-value {
-    font-size: 24px;
-    font-weight: bold;
-    color: var(--primary);
-    margin: 5px 0;
-}
-
-.macro-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-    margin: 20px 0;
-}
-
-/* ===== MELHORIAS PARA MOBILE ===== */
-@media (max-width: 768px) {
-    .gender-selector {
-        flex-direction: column;
-    }
-    
-    .macro-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .tab {
-        padding: 10px 5px;
-        font-size: 14px;
-    }
-}
-/* ===== ESTILOS GERAIS ===== */
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    line-height: 1.6;
-    color: #333;
-    max-width: 100%;
-    padding: 15px;
-    margin: 0 auto;
-    background-color: #f5f5f5;
-}
-
-.container {
-    background-color: white;
-    border-radius: 10px;
-    padding: 20px;
-    margin-bottom: 20px;
-    box-shadow: 0 3px 6px rgba(0,0,0,0.1);
-}
-
-h1, h2, h3, h4 {
-    color: #2c3e50;
-}
-
-h1 {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.form-group {
-    margin-bottom: 15px;
-    margin-right: 15px;
-}
-
-label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: 600;
-}
-
-input, select {
-    width: 100%;
-    padding: 12px;
-    border: 2px solid #ddd;
-    border-radius: 6px;
-    font-size: 16px;
-    transition: border 0.3s;
-}
-
-input:focus, select:focus {
-    border-color: #3498db;
-    outline: none;
-}
-
-button {
-    width: 100%;
-    padding: 15px;
-    background-color: #3498db;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    font-size: 18px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-button:hover {
-    background-color: #2980b9;
-}
-
-button:disabled {
-    background-color: #95a5a6;
-    cursor: not-allowed;
-}
-
-.error-message {
-    color: #e74c3c;
-    font-size: 12px;
-    margin-top: 5px;
-    display: none;
-}
-
-.input-hint {
-    font-size: 12px;
-    color: #7f8c8d;
-    margin-top: 0px;
-    margin-bottom: 10px;
-}
-
-/* ===== RESULTADOS ===== */
-.result {
-    margin-top: 20px;
-    padding: 20px;
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 3px 6px rgba(0,0,0,0.1);
-    display: none;
-}
-
-.result-value {
-    font-size: 24px;
-    font-weight: bold;
-    color: #3498db;
-    margin: 5px 0;
-}
-
-.info-card {
-    background-color: #ecf0f1;
-    border-left: 4px solid #3498db;
-    padding: 15px;
-    margin: 15px 0;
-    border-radius: 0 6px 6px 0;
-}
-
-.info-card h4 {
-    margin-top: 0;
-}
-
-/* ===== ABAS ===== */
-.tabs {
-    display: flex;
-    margin-bottom: 20px;
-    border-bottom: 1px solid #ddd;
-}
-
-.tab {
-    flex: 1;
-    text-align: center;
-    padding: 12px;
-    cursor: pointer;
-    transition: all 0.3s;
-    border-bottom: 3px solid transparent;
-}
-
-.tab.active {
-    border-bottom-color: #3498db;
-    font-weight: bold;
-    color: #3498db;
-}
-
-.tab-content {
-    display: none;
-}
-
-.tab-content.active {
-    display: block;
-}
-
 /* ===== GRÁFICOS ===== */
 .chart-container {
     position: relative;
     height: 250px;
     margin: 20px 0;
+    background-color: white;
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.06);
 }
 
 /* ===== MACRONUTRIENTES ===== */
@@ -346,6 +195,7 @@ button:disabled {
     border-radius: 8px;
     color: white;
     text-align: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 .macro-card h3 {
@@ -354,18 +204,25 @@ button:disabled {
 }
 
 .carbs-card {
-    background-color: #e74c3c;
+    background-color: var(--carbs-color); /* Verde para carboidratos */
 }
 
 .protein-card {
-    background-color: #3498db;
+    background-color: var(--protein-color); /* Vermelho para proteína */
 }
 
 .fat-card {
-    background-color: #f39c12;
+    background-color: var(--fat-color); /* Amarelo/Laranja para gordura */
 }
 
-/* ===== SELETOR DE GÊNERO ===== */
+.macro-card h3,
+.macro-card .result-value,
+.macro-card p {
+    color: white !important;
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.3);
+}
+
+/* Seletor de gênero - versão otimizada */
 .gender-selector {
     display: flex;
     gap: 15px;
@@ -375,57 +232,88 @@ button:disabled {
 .gender-option {
     flex: 1;
     padding: 20px 10px;
-    border: 2px solid #ddd;
+    border: 1px solid var(--neutral-medium);
     border-radius: 10px;
     text-align: center;
     cursor: pointer;
     transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
 }
 
-.macro-card h3, 
-.macro-card .result-value, 
-.macro-card p {
-    color: white !important;
-    text-shadow: 1px 1px 1px rgba(0,0,0,0.3);
+.gender-option.selected {
+    border-color: var(--primary);
+    background-color: rgba(85, 122, 70, 0.1);
+    box-shadow: 0 2px 6px rgba(85, 122, 70, 0.15);
 }
 
+/* Cores específicas para cada gênero */
+.gender-option[data-value="female"].selected {
+    border-color: var(--female-color); /* Rosa moderno */
+    background-color: rgba(194, 24, 91, 0.1);
+    box-shadow: 0 2px 6px rgba(194, 24, 91, 0.15);
+}
+
+/* Mantenha um tom de azul para o masculino */
+.gender-option[data-value="male"].selected {
+    border-color: var(--male-color); /* Azul moderno */
+    background-color: rgba(30, 136, 229, 0.1);
+    box-shadow: 0 2px 6px rgba(30, 136, 229, 0.15);
+}
 
 .gender-option:not(.selected) {
-    opacity: 0.6;
-    filter: grayscale(30%);
+    opacity: 0.7;
+    filter: grayscale(20%);
+    color: var(--text-secondary);
 }
 
 .gender-icon {
     margin-bottom: 8px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .gender-icon img {
-    width: 40px;
-    height: 40px;
+    width: 100%;
+    height: 100%;
     pointer-events: none;
+    object-fit: contain;
+    /* A cor será definida via SVG fill ou estilos inline se necessário */
+}
+
+/* Cores específicas para os ícones de gênero (se os ícones forem SVG e puderem ser preenchidos por CSS) */
+.gender-option[data-value="male"] .gender-icon img {
+    fill: var(--male-color);
+    color: var(--male-color);
+}
+
+.gender-option[data-value="female"] .gender-icon img {
+    fill: var(--female-color);
+    color: var(--female-color);
 }
 
 .gender-label {
+    font-family: 'The Seasons';
     font-weight: 600;
-    color: #2c3e50;
+    color: var(--text-primary);
     font-size: 14px;
+    margin-top: 8px;
+    pointer-events: none;
+    user-select: none;
 }
 
-/* ===== RESPONSIVIDADE ===== */
-@media (max-width: 768px) {
-    .gender-selector {
-        flex-direction: column;
-    }
-    
-    .macro-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .tab {
-        padding: 10px 5px;
-        font-size: 14px;
-    }
+/* Efeito hover para melhor interação */
+.gender-option:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
 }
+
 #monthly-goal-container {
     transition: all 0.3s ease;
     overflow: hidden;
@@ -439,23 +327,24 @@ button:disabled {
 #bmi-value {
     font-size: 1.8rem;
     margin: 10px 0;
+    color: var(--accent);
 }
 
 /* Cores para diferentes classificações de IMC */
 #bmi-value.underweight {
-    color: #3498db; /* Azul para baixo peso */
+    color: var(--male-color); /* Azul moderno para baixo peso */
 }
 
 #bmi-value.normal {
-    color: #2ecc71; /* Verde para normal */
+    color: var(--carbs-color); /* Verde moderno para normal */
 }
 
 #bmi-value.overweight {
-    color: #f39c12; /* Laranja para sobrepeso */
+    color: var(--fat-color); /* Laranja moderno para sobrepeso */
 }
 
 #bmi-value.obese {
-    color: #e74c3c; /* Vermelho para obesidade */
+    color: var(--protein-color); /* Vermelho moderno para obesidade */
 }
 
 /* Estilos para a tabela de classificação */
@@ -464,26 +353,30 @@ button:disabled {
     border-collapse: collapse;
     margin-top: 10px;
     font-size: 0.9rem;
+    background-color: white;
+    color: var(--text-primary);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
 }
 
 .bmi-table th, .bmi-table td {
     padding: 8px;
     text-align: left;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid var(--neutral-medium);
 }
 
 .bmi-table th {
-    background-color: #f2f2f2;
+    background-color: var(--neutral-light);
+    color: var(--accent);
 }
 
 .bmi-table tr:nth-child(even) {
-    background-color: #f9f9f9;
+    background-color: #f5f5f5;
 }
 
 .source {
     font-style: italic;
     font-size: 0.8rem;
-    color: #7f8c8d;
+    color: var(--text-secondary);
     margin-top: 5px;
 }
 
@@ -494,9 +387,41 @@ details {
 details summary {
     cursor: pointer;
     font-weight: 600;
-    color: #3498db;
+    color: var(--primary);
 }
 
 details summary:hover {
     text-decoration: underline;
 }
+
+/* ===== MELHORIAS PARA MOBILE ===== */
+@media (max-width: 768px) {
+    .gender-selector {
+        flex-direction: column;
+    }
+
+    .macro-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .tab {
+        padding: 10px 5px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .gender-selector {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .gender-option {
+        padding: 15px 5px;
+    }
+}
+
+
+@import url('https://fonts.googleapis.com/css2?family=The+Seasons&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Arsenal:wght@400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
