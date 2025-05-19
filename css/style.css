@@ -432,6 +432,101 @@ details summary:hover {
     }
 }
 
+.contact-footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  background-color: var(--neutral-light);
+  padding: 20px 15px;
+  border-top: 2px solid var(--neutral-medium);
+  border-radius: 10px;
+  box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.05);
+  margin-top: 20px;
+  min-height: 15px;
+  gap: 20px;
+}
+
+.footer-left, .footer-right {
+  flex: 1;
+  min-width: 260px;
+}
+
+.footer-left h4 {
+  color: var(--accent);
+  margin: 8px 0 12px;
+  font-weight: 500;
+}
+
+.footer-right {
+  align-self: flex-end;
+  text-align: right;
+}
+
+.footer-right p {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin: 0 0 8px;
+  margin-top: -75px;
+}
+
+.contact-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.contact-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 13px;
+  color: white;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease-in-out;
+  width: fit-content;
+}
+
+.contact-btn img {
+  width: 16px;
+  height: 16px;
+}
+
+.contact-btn:hover {
+  opacity: 0.9;
+}
+
+.contact-btn.whatsapp { 
+    background-color: #25D366; 
+    animation: pulse 1.5s infinite;
+}
+.contact-btn.email { 
+    background: #c7372d;
+}
+.contact-btn.instagram {
+  background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+}
+.contact-btn.github { background-color: #434e53; }
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .contact-footer {
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+  }
+
+  .footer-right {
+    text-align: center;
+    align-self: center;
+  }
+}
+
+
 
 @import url('https://fonts.googleapis.com/css2?family=The+Seasons&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Arsenal:wght@400&display=swap');
