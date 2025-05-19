@@ -438,18 +438,18 @@ details summary:hover {
   justify-content: space-between;
   align-items: flex-start;
   background-color: var(--neutral-light);
-  padding: 20px 15px;
+  padding: 10px 10px 10px;
   border-top: 2px solid var(--neutral-medium);
   border-radius: 10px;
   box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.05);
-  margin-top: 20px;
-  min-height: 15px;
+  margin-top: 5px;
+  min-height: auto;
   gap: 20px;
 }
 
 .footer-left, .footer-right {
   flex: 1;
-  min-width: 260px;
+  min-width: 60px;
 }
 
 .footer-left h4 {
@@ -466,8 +466,7 @@ details summary:hover {
 .footer-right p {
   font-size: 14px;
   color: var(--text-secondary);
-  margin: 0 0 8px;
-  margin-top: -75px;
+  margin: 10px 0 8px;
 }
 
 .contact-buttons {
@@ -516,17 +515,21 @@ details summary:hover {
 @media (max-width: 768px) {
   .contact-footer {
     flex-direction: column;
-    text-align: center;
     align-items: center;
+    text-align:center;
+    padding: 10px 10px 10px;
+  }
+
+  .contact-buttons {
+    justify-content: center;
+    gap: 8px;
   }
 
   .footer-right {
+    width: 100%;
     text-align: center;
-    align-self: center;
   }
 }
-
-
 
 @import url('https://fonts.googleapis.com/css2?family=The+Seasons&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Arsenal:wght@400&display=swap');
