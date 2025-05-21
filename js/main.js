@@ -247,7 +247,7 @@ const DOM = {
             break;
             
         case 'bulk':
-            const dailySurplus = monthlyGoal * 7700 / 30; // Aprox. 2000kcal para ganhar 0.5kg de músculo/semana
+            const dailySurplus = monthlyGoal * 4* 7700 / 30; // Aprox. 2000kcal para ganhar 0.5kg de músculo/semana
             calories = tdee + dailySurplus;
             explanation = `Superávit de ~${Math.round(dailySurplus)}kcal/dia para ganhar ${monthlyGoal}kg/semana`;
             break;
