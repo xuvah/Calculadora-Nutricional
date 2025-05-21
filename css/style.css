@@ -107,6 +107,55 @@ button:disabled {
     cursor: not-allowed;
 }
 
+.calorie-warning {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Centraliza o conteúdo */
+  background-color: #fff8dc;
+  color: #856404;
+  border: 1px solid #ffeeba;
+  padding: 12px 16px;
+  margin-bottom: 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: 'Raleway', sans-serif;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  min-height: 48px;
+  text-align: center;
+}
+
+.warning-icon {
+  position: absolute;
+  left: 16px;
+  font-size: 25px;
+  animation: pulse 1.5s infinite;
+}
+
+.warning-text {
+  max-width: 90%;
+  line-height: 1.4;
+}
+
+.close-warning {
+  position: absolute;
+  top: 6px;
+  right: 10px;
+  background: transparent;
+  border: none;
+  color: #856404;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 2px 6px;
+  line-height: 1;
+  width: fit-content;
+}
+
+.close-warning:hover {
+  color: #5c4400;
+}
+
 .error-message {
     color: #d32f2f; /* Vermelho mais escuro para erro */
     font-size: 12px;

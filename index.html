@@ -94,6 +94,18 @@
         </div>
 
     </div>
+
+    <div id="calorie-warning" class="calorie-warning" style="display: none;">
+        <div class="warning-content">
+            <span class="warning-icon">⚠️</span>
+            <span class="warning-text">
+            A meta calórica foi ajustada para não ficar abaixo do seu TMB.<br>
+            Evitar déficits agressivos é essencial para a saúde.
+            </span>
+        </div>
+        <button class="close-warning" onclick="document.getElementById('calorie-warning').style.display='none'">✖</button>
+    </div>
+
     
     <button id="calculate-btn" onclick="calculate()" disabled>Calcular</button>
     

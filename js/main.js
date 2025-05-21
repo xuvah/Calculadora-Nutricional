@@ -177,7 +177,7 @@ const DOM = {
     const leanMass = bf ? weight * (1 - bf/100): null;
     const tmb = calculateTMB(sex, weight, height, age, leanMass);
     const tdee = calculateTDEE(tmb, activity);
-    const { calories, explanation } = calculateCalorieGoal(tdee, goal, monthlyGoal);
+    const { calories, explanation } = calculateCalorieGoal(tdee, goal, monthlyGoal,tmb);
     const { protein, fat, carbs } = calculateMacros(weight, calories, goal,bf);
     const { value, classification } = calculateBMI(weight, height);
     const waterIntake = (weight * 0.035).toFixed(2);
@@ -236,15 +236,25 @@ const DOM = {
     return tmb * activity;
   }
   
-  function calculateCalorieGoal(tdee, goal, monthlyGoal) {
+  function calculateCalorieGoal(tdee, goal, monthlyGoal,tmb) {
+    const warningElement = document.getElementById("calorie-warning");
+    warningElement.style.display = "none"; // Esconde por padrão
+
     let calories, explanation;
     
     switch(goal) {
         case 'cut':
-            const dailyDeficit = monthlyGoal * 4 * 7700 / 30; // 7700kcal ≈ 1kg de gordura
-            calories = tdee - dailyDeficit ;
+          const dailyDeficit = monthlyGoal * 4 * 7700 / 30; // 7700kcal ≈ 1kg de gordura
+          calories = tdee - dailyDeficit ;
+          if (calories < tmb) {
+            calories = tmb;
+            warningElement.style.display = "block"; // Mostra aviso visual
+            alert("Sua meta calórica calculada ficou abaixo do recomendado para sua saúde. Por isso, ajustamos automaticamente para sua taxa de metabolismo basal TMB, evitando déficits agressivos.");
+            explanation = "Ajustado para manter no mínimo seu metabolismo basal (TMB). Déficit original era muito agressivo.";
+          } else {
             explanation = `Déficit de ~${Math.round(dailyDeficit)}kcal/dia para perder ${monthlyGoal}kg/semana`;
-            break;
+          }
+          break;
             
         case 'bulk':
             const dailySurplus = monthlyGoal * 4* 7700 / 30; // Aprox. 2000kcal para ganhar 0.5kg de músculo/semana
