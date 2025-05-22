@@ -178,7 +178,7 @@ const DOM = {
     const tmb = calculateTMB(sex, weight, height, age, leanMass);
     const tdee = calculateTDEE(tmb, activity);
     const { calories, explanation } = calculateCalorieGoal(tdee, goal, monthlyGoal,tmb);
-    const { protein, fat, carbs } = calculateMacros(weight, calories, goal,bf);
+    const { protein, fat, carbs } = calculateMacros(weight, calories, goal,bf,activity);
     const { value, classification } = calculateBMI(weight, height);
     const waterIntake = (weight * 0.035).toFixed(2);
     
@@ -249,7 +249,7 @@ const DOM = {
           if (calories < tmb) {
             calories = tmb;
             warningElement.style.display = "block"; // Mostra aviso visual
-            alert("Sua meta calórica calculada ficou abaixo do recomendado para sua saúde. Por isso, ajustamos automaticamente para sua taxa de metabolismo basal TMB, evitando déficits agressivos.");
+            alert("A meta calórica calculada da sua dieta ficou abaixo do recomendado para sua saúde. Por isso, ajustamos automaticamente para sua taxa de metabolismo basal TMB, evitando déficits agressivos.");
             explanation = "Ajustado para manter no mínimo seu metabolismo basal (TMB). Déficit original era muito agressivo.";
           } else {
             explanation = `Déficit de ~${Math.round(dailyDeficit)}kcal/dia para perder ${monthlyGoal}kg/semana`;
@@ -281,18 +281,40 @@ const DOM = {
     }
   }
   
-  function calculateMacros(weight, calories, goal, bf) {
+  function calculateMacros(weight, calories, goal, bf, activity) {
     let protein;
+    let fat;
+    switch (activity) {
+      case 1.2:
+        protein = weight * 1.0;
+        fat = weight * 0.55;
+        break;
+      case 1.375:
+        protein = weight * 1.3;
+        fat = weight * 0.69;
+        break;
+      case 1.55:
+        protein = weight * 1.55;
+        fat = weight * 0.83;
+        break;
+      case 1.725:
+        protein = weight * 1.7;
+        fat = weight * 0.97;
+        break;
+      case 1.9:
+        protein = weight * 1.85;
+        fat = weight * 1.1;
+        break;
+    }
     
-    if (goal === 'cut') {
-      protein = weight * 1.8;
-    } else {
-      protein = weight * 2;
-    } 
-    
-    const fat = goal === 'cut' ? weight * 0.9 
+    // Ajuste de proteína para objetivo
+    // Se o objetivo for bulk, aumenta a proteína em 16%
+    // Se o objetivo for cut, diminui a proteína em 4%
+    goal === 'bulk' ? protein *= 1.16 : goal === 'cut' ? protein *= 0.98 : protein;
+
+    fat = goal === 'cut' ? fat * 0.8
     : (goal === 'bulk' && bf) ? weight *(1+((100-bf)*0.0025)) 
-    : weight;
+    : fat;
     const carbCalories = calories - (protein * 4) - (fat * 9);
     const carbs = carbCalories / 4;
     
